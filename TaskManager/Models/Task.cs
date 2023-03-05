@@ -15,6 +15,7 @@ namespace TaskManager.Models
         public string Description { get; set; }
 
         public string StatusId { get; set; }
+
         public virtual Status Status { get; set; }
 
         public DateTime PublishDate { get; set; } = DateTime.Now;
