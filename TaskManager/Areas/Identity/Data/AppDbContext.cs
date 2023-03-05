@@ -24,9 +24,9 @@ public class AppDbContext : IdentityDbContext<TaskManagerUser>
             new IdentityRole() { Id = Guid.NewGuid().ToString(), Name = "Admin", NormalizedName = "ADMIN" },
             new IdentityRole() { Id = Guid.NewGuid().ToString(), Name = "User", NormalizedName = "USER" });
 
-        builder.Entity<IdentityUser>().HasData(
-            new IdentityUser() { Id = Guid.NewGuid().ToString(), UserName = "admin", Email = "admin@admin.com" ,EmailConfirmed = true, PasswordHash = Crypto.HashPassword("Zaq12wsx!"), PhoneNumberConfirmed = true },
-            new IdentityUser() { Id = Guid.NewGuid().ToString(), UserName = "user", Email = "user@user.com", EmailConfirmed = true, PasswordHash = Crypto.HashPassword("Zaq12wsx!"), PhoneNumberConfirmed = true });
+        builder.Entity<TaskManagerUser>().HasData(
+            new TaskManagerUser() { Id = Guid.NewGuid().ToString(), UserName = "admin", Email = "admin@admin.com" ,EmailConfirmed = true, PasswordHash = Crypto.HashPassword("Zaq12wsx!"), PhoneNumberConfirmed = true },
+            new TaskManagerUser() { Id = Guid.NewGuid().ToString(), UserName = "user", Email = "user@user.com", EmailConfirmed = true, PasswordHash = Crypto.HashPassword("Zaq12wsx!"), PhoneNumberConfirmed = true });
 
         builder.Entity<Status>().HasData(
             new Status() { Id = "To do" },
