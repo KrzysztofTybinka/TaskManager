@@ -8,11 +8,14 @@ namespace TaskManager.Models
         [Key]
         public int Id { get; set; }
 
+        [Required, StringLength(30)]
         public string Title { get; set; }
 
+        [Required, StringLength(400)]
         public string Description { get; set; }
 
-        //public int Status { get; set; }
+        public string StatusId { get; set; }
+        public virtual Status Status { get; set; }
 
         public DateTime PublishDate { get; set; } = DateTime.Now;
 
@@ -21,8 +24,8 @@ namespace TaskManager.Models
         public string PublisherId { get; set; }
         public virtual TaskManagerUser Publisher { get; set; }
 
-        public string AssigneeId { get; set; }
-        public virtual TaskManagerUser Assignee { get; set; }
+        public string? AssigneeId { get; set; }
+        public virtual TaskManagerUser? Assignee { get; set; }
 
     }
 }
