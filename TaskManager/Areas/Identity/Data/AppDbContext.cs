@@ -1,22 +1,37 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Web.Helpers;
 using TaskManager.Areas.Identity.Data;
+using TaskManager.Models;
 
 namespace TaskManager.Areas.Identity.Data;
 
 public class AppDbContext : IdentityDbContext<TaskManagerUser>
 {
-    public AppDbContext(DbContextOptions<AppDbContext> options)
-        : base(options)
+    public DbSet<Models.Task> Tasks { get; set; }
+    public DbSet<Status> Statuses { get; set; }
+
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
     }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-        // Customize the ASP.NET Identity model and override the defaults if needed.
-        // For example, you can rename the ASP.NET Identity table names and more.
-        // Add your customizations after calling base.OnModelCreating(builder);
+
+        builder.Entity<IdentityRole>().HasData(
+            new IdentityRole() { Id = Guid.NewGuid().ToString(), Name = "Admin", NormalizedName = "ADMIN" },
+            new IdentityRole() { Id = Guid.NewGuid().ToString(), Name = "User", NormalizedName = "USER" });
+
+        builder.Entity<IdentityUser>().HasData(
+            new IdentityUser() { Id = Guid.NewGuid().ToString(), UserName = "admin", Email = "admin@admin.com" ,EmailConfirmed = true, PasswordHash = Crypto.HashPassword("Zaq12wsx!"), PhoneNumberConfirmed = true },
+            new IdentityUser() { Id = Guid.NewGuid().ToString(), UserName = "user", Email = "user@user.com", EmailConfirmed = true, PasswordHash = Crypto.HashPassword("Zaq12wsx!"), PhoneNumberConfirmed = true });
+
+
+        builder.Entity<Status>().HasData(
+            new Status() { Id = "To do" },
+            new Status() { Id = "Pending" },
+            new Status() { Id = "Done" });
     }
 }
