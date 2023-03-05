@@ -28,10 +28,25 @@ public class AppDbContext : IdentityDbContext<TaskManagerUser>
             new IdentityUser() { Id = Guid.NewGuid().ToString(), UserName = "admin", Email = "admin@admin.com" ,EmailConfirmed = true, PasswordHash = Crypto.HashPassword("Zaq12wsx!"), PhoneNumberConfirmed = true },
             new IdentityUser() { Id = Guid.NewGuid().ToString(), UserName = "user", Email = "user@user.com", EmailConfirmed = true, PasswordHash = Crypto.HashPassword("Zaq12wsx!"), PhoneNumberConfirmed = true });
 
-
         builder.Entity<Status>().HasData(
             new Status() { Id = "To do" },
             new Status() { Id = "Pending" },
             new Status() { Id = "Done" });
+
+        builder.Entity<Models.Task>()
+            .HasOne(s => s.Status)
+            .WithMany()
+            .HasForeignKey(t => t.StatusId);
+
+        builder.Entity<Models.Task>()
+            .HasOne(p => p.Publisher)
+            .WithMany()
+            .HasForeignKey(p => p.PublisherId);
+
+        builder.Entity<Models.Task>()
+            .HasOne(a => a.Assignee)
+            .WithMany()
+            .HasForeignKey(a => a.AssigneeId);
+
     }
 }
