@@ -12,7 +12,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TaskManager</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,20 +20,25 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
                 </div>
-                <partial name="_LoginPartial" />
             </div>
         </nav>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
+            <h1 style="text-align: center; font-size: 64px">Task Manager</h1>
+            <p style="text-align: center; font-size: 24px">
+            Welcome to our task management platform! Our platform allows users to browse 
+            through a list of tasks, take on those tasks, and add their own tasks to a 
+            public list. This feature enables seamless collaboration and communication within teams.
+            Our platform is designed to simplify teamwork, enhance productivity, and promote a 
+            cohesive working environment. Whether you're working remotely or in an office, our 
+            platform has got you covered. Join our community today and take your teamwork to the next level! 
+            </p>            
         </main>
     </div>
 
