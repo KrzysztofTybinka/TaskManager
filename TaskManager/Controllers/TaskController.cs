@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -14,10 +15,12 @@ namespace TaskManager.Controllers
     public class TaskController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly UserManager<TaskManagerUser> _userManager;
 
-        public TaskController(AppDbContext context)
+        public TaskController(AppDbContext context, UserManager<TaskManagerUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Task
@@ -66,6 +69,10 @@ namespace TaskManager.Controllers
         {
             if (ModelState.IsValid)
             {
+                task.PublishDate = DateTime.Now;
+                task.AssigneeId = null;
+                task.PublisherId = _userManager.GetUserId(User);
+
                 _context.Add(task);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
