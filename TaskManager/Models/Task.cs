@@ -14,18 +14,20 @@ namespace TaskManager.Models
         [Required, StringLength(400)]
         public string Description { get; set; }
 
-        public string StatusId { get; set; }
+        public string? StatusId { get; set; }
 
-        public virtual Status Status { get; set; }
+        public virtual Status? Status { get; set; }
 
-        public DateTime PublishDate { get; set; } = DateTime.Now;
+        public DateTime PublishDate { get; set; }
 
         public DateTime? CompletionDate { get; set; } 
 
-        public string PublisherId { get; set; }
-        public virtual TaskManagerUser Publisher { get; set; }
+        public string? PublisherId { get; set; }
+
+        public virtual TaskManagerUser? Publisher { get; set; }
 
         public string? AssigneeId { get; set; }
+
         public virtual TaskManagerUser? Assignee { get; set; }
 
     }
