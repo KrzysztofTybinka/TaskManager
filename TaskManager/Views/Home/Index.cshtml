@@ -1,5 +1,26 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@using TaskManager.Areas.Identity.Data
+
+@{
     ViewData["Title"] = "Home Page";
 }
+@inject SignInManager<TaskManagerUser> SignInManager
+@inject UserManager<TaskManagerUser> UserManager
 
+@if (SignInManager.IsSignedIn(User))
+{
+    
+}
+else
+{
+    <h1 style="text-align: center; font-size: 64px">Task Manager</h1>
+    <p style="text-align: center; font-size: 24px">
+        Welcome to our task management platform! Our platform allows users to browse
+        through a list of tasks, take on those tasks, and add their own tasks to a
+        public list. This feature enables seamless collaboration and communication within teams.
+        Our platform is designed to simplify teamwork, enhance productivity, and promote a
+        cohesive working environment. Whether you're working remotely or in an office, our
+        platform has got you covered. Join our community today and take your teamwork to the next level!
+    </p>
+}
 
