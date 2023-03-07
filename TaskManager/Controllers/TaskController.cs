@@ -70,6 +70,7 @@ namespace TaskManager.Controllers
             task.PublishDate = DateTime.Now;
             task.AssigneeId = null;
             task.PublisherId = _userManager.GetUserId(User);
+            task.StatusId = "To do";
 
             if (ModelState.IsValid)
             {
