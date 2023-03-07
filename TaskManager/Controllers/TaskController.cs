@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TaskManager.Areas.Identity.Data;
 using TaskManager.Models;
+using Task = TaskManager.Models.Task;
 
 namespace TaskManager.Controllers
 {
