@@ -67,13 +67,13 @@ namespace TaskManager.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,Description,StatusId,PublishDate,CompletionDate,PublisherId,AssigneeId")] Task task)
         {
-            task.PublishDate = DateTime.Now;
-            task.AssigneeId = null;
-            task.PublisherId = _userManager.GetUserId(User);
-            task.StatusId = "To do";
-
             if (ModelState.IsValid)
             {
+                task.PublishDate = DateTime.Now;
+                task.AssigneeId = null;
+                task.PublisherId = _userManager.GetUserId(User);
+                task.StatusId = "To do";
+
                 _context.Add(task);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
