@@ -18,7 +18,7 @@ namespace TaskManager.Models
 
         public virtual Status? Status { get; set; }
 
-        public DateTime PublishDate { get; set; }
+        public DateTime? PublishDate { get; set; }
 
         public DateTime? CompletionDate { get; set; } 
 
