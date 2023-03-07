@@ -9,7 +9,14 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    
+    @if (User.IsInRole("Admin"))
+    {
+        
+    }
+    @if (User.IsInRole("User"))
+    {
+        
+    }
 }
 else
 {
