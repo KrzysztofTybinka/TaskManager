@@ -55,10 +55,17 @@
                 @Html.DisplayFor(modelItem => item.CompletionDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Publisher.Id)
+                @Html.DisplayFor(modelItem => item.Publisher.UserName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Assignee.Id)
+                    @if (item.Assignee == null)
+                    {
+                        @Html.DisplayName("────────")                        
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.Assignee.UserName)
+                    }
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
