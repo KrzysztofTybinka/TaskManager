@@ -81,7 +81,7 @@
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a>
                 @if (_userManager.GetUserId(User) == "dupa")
                 {
-                    
+                    <a asp-action="Edit" asp-route-id="Model?.Id">Edit</a>
                 }
                 </td>
         </tr>
