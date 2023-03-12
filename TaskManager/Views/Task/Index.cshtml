@@ -6,38 +6,12 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Tasks</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PublishDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CompletionDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Publisher)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Assignee)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
@@ -45,43 +19,39 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Status!.Id)
+            </td>
+        </tr>
+        <tr>
+            <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Status!.Id)
+                <div>Published: @Html.DisplayFor(modelItem => item.PublishDate)</div>
+                <div>Completed: @Html.DisplayFor(modelItem => item.CompletionDate)</div>
+                <div>Publisher: @Html.DisplayFor(modelItem => item.Publisher!.UserName)</div>
+                <div>Assignee: @Html.DisplayFor(modelItem => item.Assignee!.UserName)</div>
             </td>
+        </tr>
+        <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.PublishDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CompletionDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Publisher!.UserName)
-            </td>
-            <td>
-                @if (item.Assignee == null)
+                @if (User.IsInRole("Admin"))
                 {
-                    @Html.DisplayName("────────")                        
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
                 }
                 else
                 {
-                    @Html.DisplayFor(modelItem => item.Assignee.UserName)
-                }
-            </td>
-            <td>
-                @if (item.StatusId == "To do")
-                {                                       
-                    <a asp-action="Apply" asp-route-id="@item.Id">Apply</a>
-                }
-                @if (User.IsInRole("Admin"))
-                {
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                }
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-                @if (_userManager.GetUserId(User) == item.PublisherId && item.StatusId == "To do")
-                {
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    @if (item.StatusId == "To do")
+                    {
+                        <a asp-action="Apply" asp-route-id="@item.Id">Apply</a>
+                    }
+                    @if (_userManager.GetUserId(User) == item.PublisherId && item.StatusId == "To do")
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    }
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
                 }
             </td>
         </tr>
