@@ -97,11 +97,10 @@ namespace TaskManager.Controllers
             {
                 return NotFound();
             }
-            ViewData["AssigneeId"] = new SelectList(_context.Users, "Id", "Id", task.AssigneeId);
-            ViewData["PublisherId"] = new SelectList(_context.Users, "Id", "Id", task.PublisherId);
-            ViewData["StatusId"] = new SelectList(_context.Statuses, "Id", "Id", task.StatusId);
-            task.Status!.Id = "pending";
-            return View(task);
+            task.StatusId = "Pending";
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
 
