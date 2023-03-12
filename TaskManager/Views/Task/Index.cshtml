@@ -46,7 +46,7 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Status.Id)
+                @Html.DisplayFor(modelItem => item.Status!.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PublishDate)
@@ -55,7 +55,7 @@
                 @Html.DisplayFor(modelItem => item.CompletionDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Publisher.UserName)
+                @Html.DisplayFor(modelItem => item.Publisher!.UserName)
             </td>
             <td>
                 @if (item.Assignee == null)
