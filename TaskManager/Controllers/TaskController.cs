@@ -85,7 +85,7 @@ namespace TaskManager.Controllers
         }
 
         // GET: Task/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Apply(int? id)
         {
             if (id == null || _context.Tasks == null)
             {
@@ -100,6 +100,7 @@ namespace TaskManager.Controllers
             ViewData["AssigneeId"] = new SelectList(_context.Users, "Id", "Id", task.AssigneeId);
             ViewData["PublisherId"] = new SelectList(_context.Users, "Id", "Id", task.PublisherId);
             ViewData["StatusId"] = new SelectList(_context.Statuses, "Id", "Id", task.StatusId);
+            task.Status!.Id = "pending";
             return View(task);
         }
 
