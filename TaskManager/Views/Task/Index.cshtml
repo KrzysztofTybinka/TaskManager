@@ -79,11 +79,11 @@
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 }
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-                    @if (_userManager.GetUserId(User) == item.PublisherId)
+                @if (_userManager.GetUserId(User) == item.PublisherId && item.StatusId == "To do")
                 {
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                 }
-                </td>
+            </td>
         </tr>
 }
     </tbody>
